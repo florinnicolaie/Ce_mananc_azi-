@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator de Meniu Aleatoriu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        h1 { color: #2c3e50; margin-bottom: 1.5rem; }
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+            color: white;
+            font-weight: bold;
+        }
+        button:active { transform: scale(0.95); }
+        
+        .btn-normal { background-color: #3498db; }
+        .btn-post { background-color: #27ae60; }
+        .btn-d-normal { background-color: #e67e22; }
+        .btn-d-post { background-color: #9b59b6; }
+
+        button:hover { opacity: 0.9; }
+
+        #result-container {
+            margin-top: 2rem;
+            padding: 15px;
+            border-top: 2px solid #eee;
+            min-height: 80px;
+        }
+        #result-text {
+            font-size: 1.2rem;
+            color: #34495e;
+            font-weight: 600;
+        }
+        .category-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ce mâncăm azi?</h1>
+    
+    <div class="button-grid">
+        <button class="btn-normal" onclick="generate('normale')">Mâncare Normală</button>
+        <button class="btn-post" onclick="generate('post')">Mâncare de Post</button>
+        <button class="btn-d-normal" onclick="generate('desertNormal')">Desert Normal</button>
+        <button class="btn-d-post" onclick="generate('desertPost')">Desert de Post</button>
+    </div>
+
+    <div id="result-container">
+        <span class="category-label" id="category-name">Selectează o categorie</span>
+        <p id="result-text">Apasă un buton pentru sugestie!</p>
+    </div>
+</div>
+
+<script>
+    const retete = {
+        normale: [
+            "Piept de pui cu orez",
+            "Ton cu orez fiert",
+            "Somon cu orez fiert",
+            "Legume la cuptor cu pulpe de pui",
+            "Friptură de vită",
+            "Paste cu pesto și parmezan",
+            "Ouă fierte",
+            "Omletă",
+            "Ouă poșate",
+            "Salată de ton cu leguminoase",
+            "Roșii cu brânză",
+            "Salată clasică (roșii, castraveți și ceapă)"
+        ],
+        post: [
+            "Fasole boabe (conservă) cu lămâie și piper",
+            "Cartofi la cuptor cu mujdei de usturoi",
+            "Salată de cartofi fierți cu măsline și ceapă",
+            "Tofu afumat cu pine si mustar"
+        ],
+        desertNormal: [
+            "Chia pudding cu lapte + proteină",
+            "Orez cu lapte + proteină",
+            "Iaurt grecesc cu proteina si fructe"
+        ],
+        desertPost: [
+            "Chia pudding cu oat/almond milk"
+        ]
+    };
+
+    function generate(categorie) {
+        const lista = retete[categorie];
+        const randomIdx = Math.floor(Math.random() * lista.length);
+        const alegere = lista[randomIdx];
+        
+        // Mapare nume categorie pentru afișaj frumos
+        const numeAfisaj = {
+            'normale': 'Mâncare Normală',
+            'post': 'Mâncare de Post',
+            'desertNormal': 'Desert Normal',
+            'desertPost': 'Desert de Post'
+        };
+
+        document.getElementById('category-name').innerText = numeAfisaj[categorie];
+        document.getElementById('result-text').innerText = alegere;
+    }
+</script>
+
+</body>
+</html>
